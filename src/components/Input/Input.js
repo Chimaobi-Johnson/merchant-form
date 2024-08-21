@@ -2,7 +2,6 @@
 
 import { MerchantFormContext } from "@/contexts/MerchantFormContext";
 import { useContext } from "react";
-import { useForm } from "react-hook-form";
 
 export default function Input({
   type,

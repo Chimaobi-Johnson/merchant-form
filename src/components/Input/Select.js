@@ -1,3 +1,8 @@
+"use client"
+
+import { MerchantFormContext } from "@/contexts/MerchantFormContext";
+import { useContext } from "react";
+
 export default function Select({
   type,
   value,
@@ -8,6 +13,10 @@ export default function Select({
   defaultValue,
   ...props
 }) {
+
+  const merchantContext = useContext(MerchantFormContext)
+  const { register } = merchantContext
+
   return (
     <div className={"flex-row-reverse justify-start items-center w-fit"}>
       <label for={label?.replace(/ /g, "")}>
@@ -16,6 +25,7 @@ export default function Select({
       </label>
 
       <select
+        {...register(`${inputName}`, { required: true  })}
         defaultValue={defaultValue}
         id={label?.replace(/ /g, "")}
         name={inputName}

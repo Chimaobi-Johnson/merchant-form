@@ -15,9 +15,12 @@ import Documents from "../Steps/Documents";
 import Banking from "../Steps/Banking";
 import Review from "../Steps/Review";
 import { useForm } from "react-hook-form";
+import { MerchantFormContext } from "@/contexts/MerchantFormContext";
+import { isEmpty } from "@/utils/helperFunctions";
 
 export default function MerchantForm() {
-
+  const merchantFormContext = useContext(MerchantFormContext)
+  const { handleSubmit, errors } = merchantFormContext;
     const [currentStep, setCurrentStep] = useState(1);
 
     const [userData, setUserData] = useState({
@@ -31,13 +34,13 @@ export default function MerchantForm() {
 
   const displayStep = (step) => {
     switch (step) {
-      case 1:
+      case 4:
         return "Business info";
       case 2:
         return <Transactions />;
       case 3:
         return <Ownership />;
-      case 4:
+      case 1:
         return <Documents />;
       case 5:
         return <Banking />;
@@ -57,15 +60,13 @@ export default function MerchantForm() {
     "REVIEW",
   ];
 
-  const moveToNextStep = async (direction) => {
+  const moveToNextStep = async (data, direction) => {
+  
+    console.log(data)
+    console.log(errors)
+
     let newStep = currentStep;
     let currentStepName = steps[currentStep - 1];
-
-    console.log(newStep)
-    console.log(currentStep)
-
-    console.log(direction)
-    console.log(currentStepName)
 
     if (direction !== "next") {
       newStep--;
@@ -79,7 +80,9 @@ export default function MerchantForm() {
           break;
 
         case "OWNERSHIP":
-              newStep++;
+              // if(data && isEmpty(errors)) {
+                 newStep++;
+              // }
           break;
 
         case "DOCUMENTS":
@@ -122,7 +125,7 @@ export default function MerchantForm() {
         </div>
         <div className="mt-auto w-full">
           <StepperNavigation
-            handleClick={moveToNextStep}
+            handleClick={handleSubmit(moveToNextStep)}
             currentStep={currentStep}
             steps={steps}
           />

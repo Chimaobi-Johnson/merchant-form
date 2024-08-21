@@ -12,10 +12,9 @@ export function MerchantFormProvider ({ children }) {
         handleSubmit,
         reset,
         watch,
+        setValue,
         formState: { errors }
       } = useForm();
-
-      console.log(errors)
 
     const [ merchantForm, setMerchantForm ] = useState({
         ownership: [],
@@ -29,7 +28,8 @@ export function MerchantFormProvider ({ children }) {
        handleSubmit,
        reset,
        watch,
-       formState: { errors }
+       setValue,
+       errors 
     }
 
     return (
