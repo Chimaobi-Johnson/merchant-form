@@ -40,6 +40,7 @@ any individual with authority to perform such functions.</p>
             <div>
             <Input
               type="checkbox"
+              variant="left"
               onChange={(e) => setISR(e.target.checked)}
               label={"Is an individual with significant responsibility"}
               value={ISR}

@@ -34,15 +34,15 @@ export default function MerchantForm() {
 
   const displayStep = (step) => {
     switch (step) {
-      case 4:
+      case 5:
         return "Business info";
       case 2:
         return <Transactions />;
       case 3:
         return <Ownership />;
-      case 1:
+      case 4:
         return <Documents />;
-      case 5:
+      case 1:
         return <Banking />;
       case 6:
         return <Review />;
@@ -86,7 +86,9 @@ export default function MerchantForm() {
           break;
 
         case "DOCUMENTS":
+            // if(data && isEmpty(errors)) {
               newStep++;
+              // }
       
           break;
 
