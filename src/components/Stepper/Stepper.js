@@ -77,7 +77,7 @@ export const Stepper = ({ steps, currentStep, children }) => {
 
   return (
     <div>
-      <div className="px-6 border-b-[1px] border-gray-600">
+      <div className="px-6 border-b-[1px]">
         <ul className="list-none flex justify-around items-center">
           {displaySteps}
         </ul>

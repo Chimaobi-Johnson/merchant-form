@@ -3,7 +3,7 @@
 import Button from "@/components/Button/Button";
 
 export const StepperNavigation = ({ handleClick, currentStep, steps }) => (
-  <div className="flex justify-center items-center">
+  <div className="flex justify-between items-center my-8">
     <Button
       onClick={() => handleClick()}
       variant="basic"
