@@ -14,6 +14,7 @@ import Ownership from "../Steps/Ownership";
 import Documents from "../Steps/Documents";
 import Banking from "../Steps/Banking";
 import Review from "../Steps/Review";
+import { useForm } from "react-hook-form";
 
 export default function MerchantForm() {
 

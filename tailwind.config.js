@@ -18,6 +18,32 @@ module.exports = {
         primary_medium: "#81a2c8",
         secondary: "#b2b6ba",
       },
+      keyframes: {
+        fadeIn: {
+          "0%": {
+            opacity: 0,
+            visibility: "hidden",
+          },
+          "100%": {
+            visibility: "visible",
+            opacity: 1,
+          },
+        },
+        fadeOut: {
+          "100%": {
+            opacity: 1,
+            visibility: "visible",
+          },
+          "0%": {
+            visibility: "hidden",
+            opacity: 0,
+          },
+        },
+      },
+      animation: {
+        "fade-in": "fadeIn .5s ease-in forwards",
+        "fade-out": "fadeOut .5s ease-out forwards",
+      },
     },
   },
   plugins: [],
