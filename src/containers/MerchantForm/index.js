@@ -16,25 +16,16 @@ import Banking from "../Steps/Banking";
 import Review from "../Steps/Review";
 import { useForm } from "react-hook-form";
 import { MerchantFormContext } from "@/contexts/MerchantFormContext";
-import { isEmpty } from "@/utils/helperFunctions";
+import { extractAndSortOwners, isEmpty } from "@/utils/helperFunctions";
 
 export default function MerchantForm() {
   const merchantFormContext = useContext(MerchantFormContext)
-  const { handleSubmit, errors } = merchantFormContext;
+  const { handleSubmit, errors, merchantForm, setMerchantForm } = merchantFormContext;
     const [currentStep, setCurrentStep] = useState(1);
-
-    const [userData, setUserData] = useState({
-        contactInfo: {
-          firstName: "",
-          lastName: "",
-        }
-      });
-
-
 
   const displayStep = (step) => {
     switch (step) {
-      case 5:
+      case 1:
         return "Business info";
       case 2:
         return <Transactions />;
@@ -42,7 +33,7 @@ export default function MerchantForm() {
         return <Ownership />;
       case 4:
         return <Documents />;
-      case 1:
+      case 5:
         return <Banking />;
       case 6:
         return <Review />;
@@ -63,6 +54,7 @@ export default function MerchantForm() {
   const moveToNextStep = async (data, direction) => {
   
     console.log(data)
+
     console.log(errors)
 
     let newStep = currentStep;
@@ -80,16 +72,29 @@ export default function MerchantForm() {
           break;
 
         case "OWNERSHIP":
-              // if(data && isEmpty(errors)) {
+              if(data) {
+                console.log(data)
+                // console.log(res)
+
+                // update owners array
+                 
                  newStep++;
-              // }
+              }
           break;
 
         case "DOCUMENTS":
-            // if(data && isEmpty(errors)) {
+            if(!data.bankLetter || !data.photoIdentification || !data.bankStatement) {
+              console.log(data)
+
+              alert('You must upload files before you proceed')
+              return
+              }
+              setMerchantForm((prevState) => ({
+                ...prevState,
+                documents: [data.bankLetter, data.bankStatement, data.bankLetter]
+              }))
               newStep++;
-              // }
-      
+
           break;
 
         case "BANKING":
@@ -99,8 +104,12 @@ export default function MerchantForm() {
           break;
 
         case "REVIEW":
-
+ 
         alert('finish')
+
+
+        break;
+
 
           break;
         default:
@@ -117,15 +126,11 @@ export default function MerchantForm() {
       <Modal>
       <Stepper steps={steps} currentStep={currentStep}>
         <div className="px-8 mb-6 w-full">
-            <StepperContext.Provider
-              value={{
-                userData,
-              }}
-            >
+            <StepperContext.Provider>
               {displayStep(currentStep)}
             </StepperContext.Provider>
         </div>
-        <div className="mt-auto w-full">
+        <div className="mt-auto w-full absolute bottom-0">
           <StepperNavigation
             handleClick={handleSubmit(moveToNextStep)}
             currentStep={currentStep}
@@ -137,3 +142,5 @@ export default function MerchantForm() {
     </div>
   );
 }
+
+

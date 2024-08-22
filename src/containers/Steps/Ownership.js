@@ -3,29 +3,64 @@
 import Button from "@/components/Button/Button"
 import OwnerForm from "@/components/Forms/OwnerForm"
 import Input from "@/components/Input/Input"
-import { useEffect, useState } from "react"
+import { MerchantFormContext } from "@/contexts/MerchantFormContext"
+import { useContext, useEffect, useState } from "react"
 
-const Ownership = ({ register }) => {
+const Ownership = () => {
 
-    const [ownersArray, setOwnersArray] = useState([{
-        firstName: '',
-        lastName: ''
-    }])
+    const merchantContext = useContext(MerchantFormContext)
+    const { getValues, currentOwner, setCurrentOwner, merchantForm, setMerchantForm } = merchantContext
 
     const [ISR, setISR] = useState(false)
 
+    useEffect(() => {
+        if(ISR) {
+            setMerchantForm((prevState) => ({
+                ...prevState,
+                ownersArray: [{
+                    firstName: getValues(`${currentOwner}_firstName`),
+                    lastName: getValues(`${currentOwner}_lastName`),
+                    ownership: getValues(`${currentOwner}_ownership`),
+                    SSN: getValues(`${currentOwner}_SSN`),
+                    city: getValues(`${currentOwner}_city`),
+                    country: getValues(`${currentOwner}_country`),
+                    state: getValues(`${currentOwner}_state`),
+                    homeAddress: getValues(`${currentOwner}_homeAddress`),
+                    mobileNo: getValues(`${currentOwner}_mobileNo`),
+                    zipCode: getValues(`${currentOwner}_zipCode`),
+                    position: getValues(`${currentOwner}_position`),
+                    dob: getValues(`${currentOwner}_dob`)
+                }]
+            }))
+        }
+    }, [ISR])
+
     const addNewOwner = () => {
-        const owners = [...ownersArray]
+        const owners = [...merchantForm?.ownersArray]
         if(owners.length === 4) {
             alert("Cannot add more than 4 owners")
             return
         }
         const newOwner = {
-            firstName: '',
-            lastName: ''
+            firstName: getValues(`${currentOwner}_firstName`),
+            lastName: getValues(`${currentOwner}_lastName`),
+            ownership: getValues(`${currentOwner}_ownership`),
+            SSN: getValues(`${currentOwner}_SSN`),
+            city: getValues(`${currentOwner}_city`),
+            country: getValues(`${currentOwner}_country`),
+            state: getValues(`${currentOwner}_state`),
+            homeAddress: getValues(`${currentOwner}_homeAddress`),
+            mobileNo: getValues(`${currentOwner}_mobileNo`),
+            zipCode: getValues(`${currentOwner}_zipCode`),
+            position: getValues(`${currentOwner}_position`),
+            dob: getValues(`${currentOwner}_dob`)
         }
+        setCurrentOwner(`owner${merchantForm?.ownersArray.length + 1}`)
         owners.push(newOwner)
-        setOwnersArray(owners)
+        setMerchantForm((prevState) => ({
+            ...prevState,
+            ownersArray: owners
+        }))
     }
 
     return (
@@ -44,11 +79,10 @@ any individual with authority to perform such functions.</p>
               onChange={(e) => setISR(e.target.checked)}
               label={"Is an individual with significant responsibility"}
               value={ISR}
-            //   className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-800 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
             />
             </div>
             <div>
-                {ownersArray.length !== 0 && ownersArray.map((el, i) => <OwnerForm register ISR={ISR} key={i} title={`${ISR ? 'CONTROL PRONG (must reside in US)' : 'Owner ' + (i + 1)}`} />)}
+                {merchantForm?.ownersArray.length !== 0 && merchantForm?.ownersArray.map((el, i) => <OwnerForm register ISR={ISR} key={i} currentOwner={currentOwner} title={`${ISR ? 'CONTROL PRONG (must reside in US)' : 'Owner ' + (i + 1)}`} />)}
                 {ISR ? '' : <Button variant={'secondary'} onClick={addNewOwner}>Add New Owner</Button>}
             </div>
         </div>

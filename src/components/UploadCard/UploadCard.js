@@ -6,18 +6,23 @@ import { MerchantFormContext } from "@/contexts/MerchantFormContext";
 
 const UploadCard = ({ title, id }) => {
   const merchantContext = useContext(MerchantFormContext)
-  const { setValue } = merchantContext
+  const { setValue, register, getValues, errors, watch } = merchantContext
   const [files, setFiles] = useState([]);
+  console.log(errors)
 
   const initFileSystem = () => {
     document.getElementById(id)?.click();
   };
+
+  console.log(getValues(id))
 
   const handleFileChange = (e) => {
     if (e.target.files) {
     const filesArr = [...e.target.files]
       setFiles(filesArr);
     }
+    console.log(id)
+    console.log(watch(id))
   };
 
   const uploadFile = async () => {
@@ -69,6 +74,7 @@ const UploadCard = ({ title, id }) => {
             <Button variant={'primary'} onClick={uploadFile}>Upload</Button>
         </div>
       </div>
+      {/* { errors[id]?.type === 'required' ? <span className="text-red-400">This field is required</span> : ''} */}
       <input
         type="file"
         id={id}

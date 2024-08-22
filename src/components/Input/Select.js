@@ -11,6 +11,7 @@ export default function Select({
   label,
   required,
   defaultValue,
+  children,
   ...props
 }) {
 
@@ -19,15 +20,14 @@ export default function Select({
 
   return (
     <div className={"flex-row-reverse justify-start items-center w-fit"}>
-      <label for={label?.replace(/ /g, "")}>
-        {label ? `${label}:` : ""}
+      <label htmlFor={placeholder?.replace(/ /g, "")}>
+        {label}
         {required ? <span className="text-red-600">*</span> : ""}
       </label>
 
       <select
         {...register(`${inputName}`, { required: true  })}
-        defaultValue={defaultValue}
-        id={label?.replace(/ /g, "")}
+        id={placeholder?.replace(/ /g, "")}
         name={inputName}
         value={value}
         placeholder={placeholder}
@@ -36,10 +36,7 @@ export default function Select({
           "rounded-md w-full p-3 flex-1 bg-transparent border-[1px] border-gray-400"
         }
       >
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="mercedes">Mercedes</option>
-        <option value="audi">Audi</option>
+        {children}
       </select>
     </div>
   );
