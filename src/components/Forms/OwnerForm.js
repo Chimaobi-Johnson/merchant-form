@@ -11,7 +11,7 @@ const OwnerForm = ({ ISR, i, currentOwner }) => {
 
     return (
     <div className=" border-y-[1px] border-gray-500 py-8 my-8">
-        <h1 className=" uppercase relative">{ISR ? 'CONTROL PRONG (must reside in US)' : <span className="text-lg font-bold">{'Owner ' + i}</span>} <span className=" normal-case text-sm absolute top-3 font-medium left-[15%]">/ Control Prong</span></h1>
+        <h1 className=" uppercase relative">{ISR ? 'CONTROL PRONG (must reside in US)' : <span className="text-lg font-bold">{'Owner ' + i}</span>} {ISR ? '' : <span className=" normal-case text-sm absolute top-3 font-medium left-[15%]">/ Control Prong</span>}</h1>
 
         <div className={`flex justify-between items-center mt-6 ${ISR ? '[&>div]:w-[31%]' : '[&>div]:w-[23%]'}`}>
             <Input inputName={`${currentOwner}_firstName`} type={'text'} label={'First Name:'} required minLength={3} placeholder={'First Name'} />

@@ -52,7 +52,6 @@ export default function MerchantForm() {
   ];
 
   const moveToNextStep = async (data, direction) => {   
-    console.log(data) 
     let newStep = currentStep;
     let currentStepName = steps[currentStep - 1];
 

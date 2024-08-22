@@ -18,15 +18,15 @@ const Review = () => {
 
     return (
         <div>
-            <h1 className="font-bold">Review</h1>
-            <div className="flex justify-between items-start">
+            <h1 className="font-bold text-center uppercase text-2xl" style={{ marginBottom: '3rem'}}>Review</h1>
+            <div className="flex justify-start items-start">
                 <div>
-                <h2 className="font-bold text-primary">Ownership</h2>
+                <h2 className="font-bold text-primary" style={{ marginBottom: '2rem' }}>Ownership</h2>
 
                         {merchantForm?.ownersArray.length !== 0 && merchantForm?.ownersArray.map((el, i) => {
                             return (
                             <ul className="mt-12" key={i} >
-                                <h4 className="font-bold text-primary">{`Owner ${i + 1}`}</h4>
+                                <h4 style={{ color: 'green' }} className="font-bold text-primary">{`Owner ${i + 1}`}</h4>
                                <li className="p-6 flex justify-start items-center"><span className=" font-bold mr-2">First Name: </span>{el.firstName}</li>
                                <li className="p-6 flex justify-start items-center"><span className=" font-bold mr-2">Last Name: </span>{el.lastName}</li>
                                <li className="p-6 flex justify-start items-center"><span className=" font-bold mr-2">City: </span>{el.city}</li>
@@ -39,8 +39,8 @@ const Review = () => {
                             </ul>)
                         })}
                 </div>
-                <div>
-                <h2 className="font-bold text-primary">Documents</h2>
+                <div style={{ marginLeft: '2rem' }}>
+                <h2 className="font-bold text-primary" style={{ marginBottom: '2rem' }}>Documents</h2>
                     <ul>
                         {merchantForm?.documents.length !== 0 && merchantForm?.documents.map((el, i) => {
                             for (const [key, value] of Object.entries(el)) {
