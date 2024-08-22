@@ -1,6 +1,15 @@
 import { MerchantFormContext } from "@/contexts/MerchantFormContext"
 import { useContext } from "react"
 
+const DOCUMENT_TYPES = {
+    bankLetter: 'Bank Letter',
+    photoIdentification: 'Photo Identification',
+    taxReturn: 'Tax Return',
+    bankStatement: 'Bank Statement',
+    voidedCheck: 'Voided Check',
+    businessLicense: 'Business License',
+}
+
 const Review = () => {
 
     const merchantContext = useContext(MerchantFormContext)
@@ -12,7 +21,7 @@ const Review = () => {
             <h1 className="font-bold">Review</h1>
             <div className="flex justify-between items-start">
                 <div>
-                <h2>Ownership</h2>
+                <h2 className="font-bold text-primary">Ownership</h2>
 
                         {merchantForm?.ownersArray.length !== 0 && merchantForm?.ownersArray.map((el, i) => {
                             return (
@@ -31,13 +40,11 @@ const Review = () => {
                         })}
                 </div>
                 <div>
-                <h2>Documents</h2>
-
+                <h2 className="font-bold text-primary">Documents</h2>
                     <ul>
                         {merchantForm?.documents.length !== 0 && merchantForm?.documents.map((el, i) => {
-                            console.log(el[0].name)
                             for (const [key, value] of Object.entries(el)) {
-                                return <li key={i} className="p-6"><span className=" font-bold mr-2">{key}</span>{value[0].name}</li>
+                                return <li key={i} className="p-6"><span className=" font-bold mr-2">{DOCUMENT_TYPES[key]}: </span>{value[0].name}</li>
                             }
                         })}
                     </ul>
