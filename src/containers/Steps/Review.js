@@ -36,7 +36,9 @@ const Review = () => {
                     <ul>
                         {merchantForm?.documents.length !== 0 && merchantForm?.documents.map((el, i) => {
                             console.log(el[0].name)
-                            return <li key={i} className="p-6">{el[0].name}</li>
+                            for (const [key, value] of Object.entries(el)) {
+                                return <li key={i} className="p-6"><span className=" font-bold mr-2">{key}</span>{value[0].name}</li>
+                            }
                         })}
                     </ul>
                 </div>

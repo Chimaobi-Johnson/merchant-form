@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Input from "../Input/Input";
 import Select from "../Input/Select";
-import NumberFormat from 'react-number-format';
+import { PatternFormat  } from 'react-number-format';
 import PhoneInput from 'react-phone-number-input'
 import { useForm } from "react-hook-form";
 
@@ -13,6 +13,7 @@ const OwnerForm = ({ ISR, getValues, title, currentOwner }) => {
     return (
     <div className=" border-y-[1px] border-gray-500 py-8 my-8">
         <h1 className=" uppercase">{title}</h1>
+
         <div className={`flex justify-between items-center mt-6 ${ISR ? '[&>div]:w-[31%]' : '[&>div]:w-[23%]'}`}>
             <Input inputName={`${currentOwner}_firstName`} type={'text'} label={'First Name'} required minLength={3} placeholder={'First Name'} />
             <Input inputName={`${currentOwner}_lastName`} controlled={true} type={'text'} minLength={3} label={'Last Name'} placeholder={'Last Name'} />

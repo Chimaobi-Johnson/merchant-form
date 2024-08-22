@@ -1,5 +1,4 @@
-
-"use client"
+"use client";
 
 import { useContext, useEffect, useState } from "react";
 import Button from "@/components/Button/Button";
@@ -19,9 +18,10 @@ import { MerchantFormContext } from "@/contexts/MerchantFormContext";
 import { extractAndSortOwners, isEmpty } from "@/utils/helperFunctions";
 
 export default function MerchantForm() {
-  const merchantFormContext = useContext(MerchantFormContext)
-  const { handleSubmit, errors, merchantForm, setMerchantForm } = merchantFormContext;
-    const [currentStep, setCurrentStep] = useState(1);
+  const merchantFormContext = useContext(MerchantFormContext);
+  const { handleSubmit, errors, merchantForm, setMerchantForm } =
+    merchantFormContext;
+  const [currentStep, setCurrentStep] = useState(1);
 
   const displayStep = (step) => {
     switch (step) {
@@ -52,7 +52,6 @@ export default function MerchantForm() {
   ];
 
   const moveToNextStep = async (data, direction) => {
-  
     let newStep = currentStep;
     let currentStepName = steps[currentStep - 1];
 
@@ -61,75 +60,77 @@ export default function MerchantForm() {
     } else {
       switch (currentStepName) {
         case "BUSINESS INFO":
-            newStep++;
-        break;
+          newStep++;
+          break;
         case "TRANSACTIONS":
-              newStep++;
+          newStep++;
           break;
 
         case "OWNERSHIP":
-              if(data) {
-                 newStep++;
-              }
+          if (data) {
+            newStep++;
+          }
           break;
 
         case "DOCUMENTS":
-            if(!data.bankLetter || !data.photoIdentification || !data.bankStatement) {
-
-              alert('You must upload files before you proceed')
-              return
-              }
-              setMerchantForm((prevState) => ({
-                ...prevState,
-                documents: [data.bankLetter, data.bankStatement, data.bankLetter]
-              }))
-              newStep++;
+          if (
+            !data.bankLetter ||
+            !data.photoIdentification ||
+            !data.bankStatement
+          ) {
+            alert("You must upload files before you proceed");
+            return;
+          }
+          setMerchantForm((prevState) => ({
+            ...prevState,
+            documents: [
+              { bankLetter: data.bankLetter },
+              { bankStatement: data.bankStatement },
+              { photoIdentification: data.photoIdentification },
+            ],
+          }));
+          newStep++;
 
           break;
 
         case "BANKING":
-
-              newStep++;
+          newStep++;
 
           break;
 
         case "REVIEW":
- 
-        alert('Form submitted successfully')
+          alert("Form submitted successfully");
 
-
-        break;
-
+          break;
 
         default:
           break;
       }
     }
-    newStep > 0 && (newStep < steps.length || newStep === steps.length) && setCurrentStep(newStep);
+    newStep > 0 &&
+      (newStep < steps.length || newStep === steps.length) &&
+      setCurrentStep(newStep);
   };
-
 
   return (
     <div>
       <Header>Create Merchant</Header>
       <Modal>
-      <Stepper steps={steps} currentStep={currentStep}>
-        <div className="px-8 mb-6 w-full">
+        <Stepper steps={steps} currentStep={currentStep}>
+          <div className="px-8 mb-6 w-full">
             <StepperContext.Provider>
               {displayStep(currentStep)}
             </StepperContext.Provider>
-        </div>
-        <div className="mt-auto w-full absolute bottom-0">
-          <StepperNavigation
-            handleClick={handleSubmit(moveToNextStep)}
-            currentStep={currentStep}
-            steps={steps}
-          />
-        </div>
-      </Stepper>
+          </div>
+          <div className="mt-auto w-full absolute bottom-0">
+            <StepperNavigation
+              handleClick={handleSubmit(moveToNextStep)}
+              currentStep={currentStep}
+              steps={steps}
+            />
+          </div>
+        </Stepper>
       </Modal>
     </div>
   );
 }
-
-
