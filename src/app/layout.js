@@ -1,7 +1,10 @@
+
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { MerchantFormProvider } from "@/contexts/MerchantFormContext";
 import { Suspense } from "react";
+
+
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,12 +15,10 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <Suspense fallback={<> Loading...</>}>
       <MerchantFormProvider>
         <html lang="en">
           <body className={inter.className}>{children}</body>
         </html>
       </MerchantFormProvider>
-    </Suspense>
   );
 }

@@ -66,7 +66,7 @@ export const Stepper = ({ steps, currentStep, children }) => {
     return (
       <li
         key={index}
-        className={`transition-all duration-500 py-2 my-8 font-light text-2xl ${
+        className={`transition-all duration-500 py-2 my-8 text-xl font-normal ${
           step.selected ? " text-blue-600" : "text-black" } w-full flex items-center justify-around`}
       >
         {step.description}
@@ -77,7 +77,7 @@ export const Stepper = ({ steps, currentStep, children }) => {
 
   return (
     <div>
-      <div className="px-6 border-b-[1px] mb-4">
+      <div className="px-6 border-b-[1px] border-gray-400 mb-4">
         <ul className="list-none flex justify-around items-center">
           {displaySteps}
         </ul>
