@@ -7,8 +7,6 @@ const Review = () => {
 
     const { merchantForm } = merchantContext;
 
-    console.log(merchantForm)
-
     return (
         <div>
             <h1 className="font-bold">Review</h1>

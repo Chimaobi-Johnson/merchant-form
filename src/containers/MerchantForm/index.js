@@ -53,10 +53,6 @@ export default function MerchantForm() {
 
   const moveToNextStep = async (data, direction) => {
   
-    console.log(data)
-
-    console.log(errors)
-
     let newStep = currentStep;
     let currentStepName = steps[currentStep - 1];
 
@@ -73,18 +69,12 @@ export default function MerchantForm() {
 
         case "OWNERSHIP":
               if(data) {
-                console.log(data)
-                // console.log(res)
-
-                // update owners array
-                 
                  newStep++;
               }
           break;
 
         case "DOCUMENTS":
             if(!data.bankLetter || !data.photoIdentification || !data.bankStatement) {
-              console.log(data)
 
               alert('You must upload files before you proceed')
               return
@@ -105,13 +95,12 @@ export default function MerchantForm() {
 
         case "REVIEW":
  
-        alert('finish')
+        alert('Form submitted successfully')
 
 
         break;
 
 
-          break;
         default:
           break;
       }

@@ -8,21 +8,17 @@ const UploadCard = ({ title, id }) => {
   const merchantContext = useContext(MerchantFormContext)
   const { setValue, register, getValues, errors, watch } = merchantContext
   const [files, setFiles] = useState([]);
-  console.log(errors)
 
   const initFileSystem = () => {
     document.getElementById(id)?.click();
   };
 
-  console.log(getValues(id))
 
   const handleFileChange = (e) => {
     if (e.target.files) {
     const filesArr = [...e.target.files]
       setFiles(filesArr);
     }
-    console.log(id)
-    console.log(watch(id))
   };
 
   const uploadFile = async () => {
@@ -46,7 +42,6 @@ const UploadCard = ({ title, id }) => {
         // update with react-hook-form so form can be validated and allowed to move to next step
         setValue(id, files)
     } catch (error) {
-        console.log(error)
         alert('Error uploading file')
     }
   }

@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from "react"
 const Ownership = () => {
 
     const merchantContext = useContext(MerchantFormContext)
-    const { getValues, currentOwner, setCurrentOwner, merchantForm, setMerchantForm } = merchantContext
+    const { getValues, setValue, currentOwner, setCurrentOwner, merchantForm, setMerchantForm } = merchantContext
 
     const [ISR, setISR] = useState(false)
 
@@ -32,6 +32,7 @@ const Ownership = () => {
                     dob: getValues(`${currentOwner}_dob`)
                 }]
             }))
+            setValue('country', 'U.S')
         }
     }, [ISR])
 
@@ -82,7 +83,7 @@ any individual with authority to perform such functions.</p>
             />
             </div>
             <div>
-                {merchantForm?.ownersArray.length !== 0 && merchantForm?.ownersArray.map((el, i) => <OwnerForm register ISR={ISR} key={i} currentOwner={currentOwner} title={`${ISR ? 'CONTROL PRONG (must reside in US)' : 'Owner ' + (i + 1)}`} />)}
+                {merchantForm?.ownersArray.length !== 0 && merchantForm?.ownersArray.map((el, i) => <OwnerForm register ISR={ISR} key={i} getValues={getValues} currentOwner={currentOwner} title={`${ISR ? 'CONTROL PRONG (must reside in US)' : 'Owner ' + (i + 1)}`} />)}
                 {ISR ? '' : <Button variant={'secondary'} onClick={addNewOwner}>Add New Owner</Button>}
             </div>
         </div>

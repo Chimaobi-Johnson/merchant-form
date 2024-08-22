@@ -12,12 +12,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    // <Suspense fallback={<> Loading...</>}>
+    <Suspense fallback={<> Loading...</>}>
       <MerchantFormProvider>
         <html lang="en">
           <body className={inter.className}>{children}</body>
         </html>
       </MerchantFormProvider>
-    // </Suspense>
+    </Suspense>
   );
 }

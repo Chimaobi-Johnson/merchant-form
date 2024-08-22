@@ -1,5 +1,5 @@
 
-//VARIANT  - PRIMARY | SECONDARY
+//VARIANT  - PRIMARY | SECONDARY | BASIC
 "use client"
 
 export default function Button ({ variant, children, ...props }) {

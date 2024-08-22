@@ -8,22 +8,22 @@ import PhoneInput from 'react-phone-number-input'
 import { useForm } from "react-hook-form";
 
 
-const OwnerForm = ({ ISR, title, currentOwner }) => {
+const OwnerForm = ({ ISR, getValues, title, currentOwner }) => {
 
     return (
     <div className=" border-y-[1px] border-gray-500 py-8 my-8">
         <h1 className=" uppercase">{title}</h1>
         <div className={`flex justify-between items-center mt-6 ${ISR ? '[&>div]:w-[31%]' : '[&>div]:w-[23%]'}`}>
             <Input inputName={`${currentOwner}_firstName`} type={'text'} label={'First Name'} required minLength={3} placeholder={'First Name'} />
-            <Input inputName={`${currentOwner}_lastName`} controlled={true} type={'text'} required minLength={3} label={'Last Name'} placeholder={'Last Name'} />
+            <Input inputName={`${currentOwner}_lastName`} controlled={true} type={'text'} minLength={3} label={'Last Name'} placeholder={'Last Name'} />
             <Input inputName={`${currentOwner}_position`} controlled={true} type={'text'} required label={'Title / Position'} placeholder={'Title / Position'} />
             {ISR ? '' : <Input type={'text'} inputName={`${currentOwner}_ownership`} required controlled={true} label={'Ownership %'} placeholder={'Ownership %'} />}
         </div>
         <div className="flex justify-between items-center mt-6 [&>div]:w-[31%]">
             <Input inputName={`${currentOwner}_mobileNo`} controlled={true} type={'text'} label={'Home / Mobile Phone Number'} required placeholder={'Home / Mobile Phone Number'} />
             <Input inputName={`${currentOwner}_homeAddress`} controlled={true} type={'text'} label={'Home Address'} required minLength={3} placeholder={'Home Address'} />
-            <Select inputName={`${currentOwner}_country`} controlled={true} defaultValue={'US'} label={'Country'} required minLength={3} placeholder={'Country'}>
-                <option defaultValue={true} value="U.S">U.S</option>
+            <Select inputName={`${currentOwner}_country`} controlled={true} label={'Country'} required minLength={3} placeholder={'Country'}>
+                <option value="U.S">U.S</option>
                 <option value="Japan">Japan</option>
                 <option value="France">France</option>
                 <option value="Portugal">Portugal</option>
