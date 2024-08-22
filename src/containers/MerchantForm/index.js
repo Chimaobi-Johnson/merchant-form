@@ -19,7 +19,7 @@ import { extractAndSortOwners, isEmpty } from "@/utils/helperFunctions";
 
 export default function MerchantForm() {
   const merchantFormContext = useContext(MerchantFormContext);
-  const { handleSubmit, errors, merchantForm, setMerchantForm } =
+  const { handleSubmit, setMerchantForm } =
     merchantFormContext;
   const [currentStep, setCurrentStep] = useState(1);
 
@@ -51,7 +51,8 @@ export default function MerchantForm() {
     "REVIEW",
   ];
 
-  const moveToNextStep = async (data, direction) => {    
+  const moveToNextStep = async (data, direction) => {   
+    console.log(data) 
     let newStep = currentStep;
     let currentStepName = steps[currentStep - 1];
 
@@ -99,6 +100,9 @@ export default function MerchantForm() {
           break;
 
         case "REVIEW":
+          // if(data && isEmpty(errors)) {
+
+          // }
           alert("Form submitted successfully");
 
           break;

@@ -100,7 +100,7 @@ const Ownership = () => {
         />
       </div>
       <div>
-        {merchantForm?.ownersArray.length !== 0 &&
+        {merchantForm?.ownersArray.length !== 0 && 
           merchantForm?.ownersArray.map((el, i) => (
             <OwnerForm
               register

@@ -3,6 +3,9 @@
 import { MerchantFormContext } from "@/contexts/MerchantFormContext";
 import { useContext } from "react";
 import { PatternFormat } from "react-number-format";
+import { PhoneInput } from 'react-international-phone';
+import 'react-international-phone/style.css';
+
 
 export default function Input({
   type,
@@ -16,7 +19,7 @@ export default function Input({
   ...props
 }) {
   const merchantContext = useContext(MerchantFormContext);
-  const { register, setValue } = merchantContext;
+  const { register, watch, setValue } = merchantContext;
 
   return (
     <div
@@ -38,11 +41,11 @@ export default function Input({
         }`}
         htmlFor={placeholder}
       >
-        {label}:
+        {label}
         {required ? <span className="text-red-600">*</span> : ""}
       </label>
 
-      {label === "Social Security Number (SSN)" ? (
+      {variant === "ssn" ? (
         <PatternFormat
           placeholder={placeholder}
           className="rounded-md w-full p-3 flex-1 bg-transparent border-[1px] border-gray-400"
@@ -50,6 +53,13 @@ export default function Input({
           valueIsNumericString
           format="###-##-###"
           mask="_"
+        />
+      ) : variant === 'mobile' ? (
+        <PhoneInput
+        inputClassName="rounded-md w-full p-3 flex-1 bg-transparent border-[1px] border-gray-400"
+            defaultCountry="us"
+            value={watch(inputName)}
+            onChange={(phone) => setValue(inputName, phone)}
         />
       ) : (
         <input
