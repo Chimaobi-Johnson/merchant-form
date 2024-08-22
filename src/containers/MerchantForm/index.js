@@ -51,7 +51,7 @@ export default function MerchantForm() {
     "REVIEW",
   ];
 
-  const moveToNextStep = async (data, direction) => {
+  const moveToNextStep = async (data, direction) => {    
     let newStep = currentStep;
     let currentStepName = steps[currentStep - 1];
 
@@ -117,12 +117,12 @@ export default function MerchantForm() {
       <Header>Create Merchant</Header>
       <Modal>
         <Stepper steps={steps} currentStep={currentStep}>
-          <div className="px-8 mb-6 w-full">
+          <div className="px-8 mb-6 scrollbar w-full overflow-y-auto " style={{ height: '57vh' }}>
             <StepperContext.Provider>
               {displayStep(currentStep)}
             </StepperContext.Provider>
           </div>
-          <div className="mt-auto w-full absolute bottom-0">
+          <div className="mt-auto w-full bottom-0 bg-white " style={{ backgroundColor: 'white' }}>
             <StepperNavigation
               handleClick={handleSubmit(moveToNextStep)}
               currentStep={currentStep}

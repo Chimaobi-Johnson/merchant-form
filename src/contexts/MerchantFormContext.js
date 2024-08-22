@@ -41,7 +41,6 @@ export function MerchantFormProvider ({ children }) {
         documents: []
     })
 
-
     const value = {
        merchantForm,
        setMerchantForm,

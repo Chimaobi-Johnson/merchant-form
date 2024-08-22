@@ -16,7 +16,7 @@ export default function Input({
   ...props
 }) {
   const merchantContext = useContext(MerchantFormContext);
-  const { register, watch } = merchantContext;
+  const { register, setValue } = merchantContext;
 
   return (
     <div
@@ -34,11 +34,11 @@ export default function Input({
             ? "w-fit font-bold"
             : variant === "right"
             ? "w-[30%]"
-            : ""
+            : "mb-1"
         }`}
         htmlFor={placeholder}
       >
-        {label}
+        {label}:
         {required ? <span className="text-red-600">*</span> : ""}
       </label>
 
@@ -46,10 +46,7 @@ export default function Input({
         <PatternFormat
           placeholder={placeholder}
           className="rounded-md w-full p-3 flex-1 bg-transparent border-[1px] border-gray-400"
-          {...register(`${inputName}`, {
-            required: required,
-            minLength: minLength,
-          })}
+          onChange={(e) => setValue(inputName, e.target.value)}
           valueIsNumericString
           format="###-##-###"
           mask="_"
